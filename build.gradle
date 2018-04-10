@@ -182,7 +182,7 @@ dependencies {
 	// 云片
 	compile 'com.yunpian.sdk:yunpian-java-sdk:1.2.4'
 	// 7牛
-	compile 'com.qiniu:qiniu-java-sdk:7.1.+'
+	compile 'com.qiniu:qiniu-java-sdk:7.2.11'
 	// Wechat-Group
 	compile 'com.github.binarywang:weixin-java-pay:2.9.0'
 	// Jodd 工具包
