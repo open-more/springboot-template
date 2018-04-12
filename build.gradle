@@ -96,6 +96,7 @@ def getAppProperties = {
 		}
 	}else{
 		println('## 警告：src/main/resources/application.properties没有找到')
+		exit -1
 	}
 //	println(properties)
 	properties
