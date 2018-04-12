@@ -22,7 +22,8 @@
                         connectionURL="${connectionURL}"
                         userId="${userId}"
                         password="${password}">
-                </jdbcConnection>
+        </jdbcConnection>
+
 
       <!--  <javaModelGenerator targetPackage="${modelPackage}"
                             targetProject="${src_main_java}">
@@ -49,58 +50,13 @@
         <javaClientGenerator targetPackage="${mapperPackage}" targetProject="${src_main_java}" type="XMLMAPPER" />
 
 
-        <table tableName="user"  >
+        <table tableName="formItem"  >
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
 
-        <table tableName="message"  >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="pattern"  >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="pattern_type"  >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="color"  >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="creation"  >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="creation_order"  >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="order_status" >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-
-        </table>
-        <table tableName="third_authorizations"  >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="pottery_exhibition"  >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="wxpay_transaction"  >
+        <table tableName="visaTemplate"  >
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
 
-        <table tableName="alipay_transaction"  >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="administrator"  >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="system_config"  >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="color_order"  >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="pattern_order"  >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="creation_user_thumb"  >
-        </table>
     </context>
 </generatorConfiguration>

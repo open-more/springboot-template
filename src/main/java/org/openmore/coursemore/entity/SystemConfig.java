@@ -5,7 +5,6 @@ import javax.persistence.*;
 
 @Table(name = "system_config")
 public class SystemConfig {
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

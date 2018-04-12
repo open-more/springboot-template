@@ -5,7 +5,6 @@ import javax.persistence.*;
 
 @Table(name = "alipay_transaction")
 public class AlipayTransaction {
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

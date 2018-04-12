@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.openmore.coursemore.dao.UserMapper">
-    <resultMap id="BaseResultMap" type="org.openmore.coursemore.entity.User">
-        <!--
-          WARNING - @mbg.generated
-        -->
-        <result column="id" jdbcType="INTEGER" property="id"/>
-        <result column="uuid" jdbcType="VARCHAR" property="uuid"/>
-        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
-        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
-        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
-        <result column="birthday" jdbcType="VARCHAR" property="birthday"/>
-        <result column="gender" jdbcType="VARCHAR" property="gender"/>
-        <result column="location" jdbcType="VARCHAR" property="location"/>
-        <result column="is_test" jdbcType="SMALLINT" property="isTest"/>
-        <result column="status" jdbcType="SMALLINT" property="status"/>
-        <result column="coin_quantity" jdbcType="INTEGER" property="coinQuantity"/>
-        <result column="login_time" jdbcType="TIMESTAMP" property="loginTime"/>
-        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
-        <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime"/>
-    </resultMap>
+  <resultMap id="BaseResultMap" type="org.openmore.coursemore.entity.User">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="is_test" jdbcType="SMALLINT" property="isTest" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="coin_quantity" jdbcType="INTEGER" property="coinQuantity" />
+    <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
 
     <update id="updateCoin">
         UPDATE user SET coin_quantity = #{amount, jdbcType=INTEGER}
@@ -33,10 +33,10 @@
     <select id="selectUser" resultType="org.openmore.coursemore.entity.User">
         SELECT * FROM user
         <where>
-            <if test='mobile != null and mobile != ""'>
+            <if test="mobile != null and mobile != &quot;&quot;">
                 mobile like concat(concat('%',#{mobile}),'%')
             </if>
-            <if test='nickname != null and nickname != ""'>
+            <if test="nickname != null and nickname != &quot;&quot;">
                 AND nickname like concat(concat('%',#{nickname}),'%')
             </if>
         </where>

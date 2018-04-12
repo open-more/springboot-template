@@ -97,6 +97,7 @@ def getAppProperties = {
 	}else{
 		println('## 警告：src/main/resources/application.properties没有找到')
 	}
+//	println(properties)
 	properties
 }
 
@@ -182,7 +183,7 @@ dependencies {
 	// 云片
 	compile 'com.yunpian.sdk:yunpian-java-sdk:1.2.4'
 	// 7牛
-	compile 'com.qiniu:qiniu-java-sdk:7.1.+'
+	compile 'com.qiniu:qiniu-java-sdk:7.2.11'
 	// Wechat-Group
 	compile 'com.github.binarywang:weixin-java-pay:2.9.0'
 	// Jodd 工具包
@@ -264,15 +265,15 @@ task mybatisGenerate  {
 		def prop = getAppProperties()
 
 		ant.properties['targetProject'] = projectDir.path
-		ant.properties['driverClass'] = prop.getProperty('spring.datasource.driverClassName')
+		ant.properties['driverClass'] = prop.getProperty('spring.datasource.driver')
 		ant.properties['connectionURL'] = prop.getProperty('spring.datasource.url')
 		ant.properties['userId'] = prop.getProperty('spring.datasource.username')
 		ant.properties['password'] = prop.getProperty('spring.datasource.password')
 		ant.properties['src_main_java'] = sourceSets.main.java.srcDirs[0].path
 		ant.properties['src_main_resources'] = sourceSets.main.resources.srcDirs[0].path
-		ant.properties['modelPackage'] = this.modelPackage
-		ant.properties['mapperPackage'] = this.mapperPackage
-		ant.properties['sqlMapperPackage'] = this.sqlMapperPackage
+		ant.properties['modelPackage'] = prop.getProperty('modelPackage')
+		ant.properties['mapperPackage'] = prop.getProperty('mapperPackage')
+		ant.properties['sqlMapperPackage'] = prop.getProperty('sqlMapperPackage')
 
 		ant.taskdef(
 				name: 'mbgenerator',

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.openmore.coursemore.dao.MessageMapper">
-    <resultMap id="BaseResultMap" type="org.openmore.coursemore.entity.Message">
-        <!--
-          WARNING - @mbg.generated
-        -->
-        <result column="id" jdbcType="INTEGER" property="id"/>
-        <result column="user_id" jdbcType="INTEGER" property="userId"/>
-        <result column="type" jdbcType="SMALLINT" property="type"/>
-        <result column="title" jdbcType="VARCHAR" property="title"/>
-        <result column="content" jdbcType="VARCHAR" property="content"/>
-        <result column="action" jdbcType="VARCHAR" property="action"/>
-        <result column="is_read" jdbcType="SMALLINT" property="isRead"/>
-        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
-        <result column="expired_time" jdbcType="TIMESTAMP" property="expiredTime"/>
-    </resultMap>
+  <resultMap id="BaseResultMap" type="org.openmore.coursemore.entity.Message">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="action" jdbcType="VARCHAR" property="action" />
+    <result column="is_read" jdbcType="SMALLINT" property="isRead" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="expired_time" jdbcType="TIMESTAMP" property="expiredTime" />
+  </resultMap>
     <select id="getMessageByUser" parameterType="int" resultType="org.openmore.coursemore.dto.MessageDto">
         SELECT * FROM message
         WHERE user_id = #{uid} AND NOW() BETWEEN created_time AND expired_time

@@ -5,7 +5,6 @@ import javax.persistence.*;
 
 @Table(name = "third_authorizations")
 public class ThirdAuthorizations {
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

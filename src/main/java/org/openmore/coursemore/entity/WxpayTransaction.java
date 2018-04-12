@@ -5,7 +5,6 @@ import javax.persistence.*;
 
 @Table(name = "wxpay_transaction")
 public class WxpayTransaction {
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
