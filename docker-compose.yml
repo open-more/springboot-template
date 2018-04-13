@@ -1,0 +1,18 @@
+myredis:
+  image: redis:latest
+  ports:
+    - "6779:6379"
+  volumes:
+    - ./docker/conf/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+  command: redis-server /usr/local/etc/redis/redis.conf
+
+mycentos7:
+  image: openjdk:8u151-jdk-alpine
+  ports:
+    - "9191:9191"
+  volumes:
+    - ./build/libs/:/root/:rw
+    - ./logs/:/var/www/:rw
+  links:
+    - myredis:redis
+  command: "java -jar /root/springboot-template.jar --debug"

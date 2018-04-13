@@ -22,6 +22,7 @@ import org.openmore.common.shiro.MyRealm;
 import org.openmore.common.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class BaseTestCase {
 
 	private static ThreadState subjectThreadState;
-
 
 	/**
 	 * Allows subclasses to set the currently executing {@link Subject} instance.

@@ -26,7 +26,7 @@ public class PaymentServiceImplTest extends BaseTestCase {
     /**
      * Method: wxPay(String title, String desc, String outTradeNumber, BigDecimal price)
      */
-    @Test
+//    @Test
     public void testWxPay() throws Exception {
         String result = paymentService.wxPay("test title", "test desc", CommonUtils.getNowDateString(4), new BigDecimal(1));
         assertTrue(!StringUtils.isEmpty(result));

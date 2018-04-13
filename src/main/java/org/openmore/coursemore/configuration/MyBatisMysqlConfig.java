@@ -1,31 +1,58 @@
 package org.openmore.coursemore.configuration;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.support.http.StatViewServlet;
+import com.alibaba.druid.support.http.WebStatFilter;
 import com.github.pagehelper.PageInterceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
-import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Properties;
 
 /**
  * Created by michaeltang on 2018/3/22.
  */
+@Profile("mysqlDb")
 @Configuration
-public class MyBatisConfig implements EnvironmentAware{
+public class MyBatisMysqlConfig implements EnvironmentAware{
     private Environment env;
+
+    @Bean
+    public ServletRegistrationBean druidServlet() {
+        ServletRegistrationBean reg = new ServletRegistrationBean();
+        reg.setServlet(new StatViewServlet());
+        reg.addUrlMappings("/druid/*");
+        reg.addInitParameter("loginUsername", "root");
+        reg.addInitParameter("loginPassword", "123456");
+        return reg;
+    }
+
+    @Bean
+    public FilterRegistrationBean filterRegistrationBean() {
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        filterRegistrationBean.setFilter(new WebStatFilter());
+        filterRegistrationBean.addUrlPatterns("/*");
+        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+        filterRegistrationBean.addInitParameter("profileEnable", "true");
+        filterRegistrationBean.addInitParameter("principalCookieName", "USER_COOKIE");
+        filterRegistrationBean.addInitParameter("principalSessionName", "USER_SESSION");
+        return filterRegistrationBean;
+    }
 
     @Bean     //声明其为Bean实例
     @Primary  //在同样的DataSource中，首先使用被标注的DataSource
@@ -59,26 +86,6 @@ public class MyBatisConfig implements EnvironmentAware{
         return datasource;
     }
 
-
-//
-//    @Bean
-//    public ComboPooledDataSource dataSource() {
-//        ComboPooledDataSource dataSource = new ComboPooledDataSource();
-//        dataSource.setMinPoolSize(Integer.parseInt(env.getProperty("spring.datasource.min-pool-size")));
-//        dataSource.setMaxPoolSize(Integer.parseInt(env.getProperty("spring.datasource.max-pool-size")));
-//        dataSource.setMaxIdleTime(Integer.parseInt(env.getProperty("spring.datasource.max-idle-time")));
-//        dataSource.setJdbcUrl(env.getProperty("spring.datasource.url"));
-//        dataSource.setPassword(env.getProperty("spring.datasource.password"));
-//        dataSource.setUser(env.getProperty("spring.datasource.username"));
-//        try {
-//            dataSource.setDriverClass(env.getProperty("spring.datasource.driver"));
-//        } catch (PropertyVetoException e) {
-//            e.printStackTrace();
-//        }
-//        return dataSource;
-//    }
-//    @Autowired
-//    private DruidDataSource dataSource;
 
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactory() {
@@ -117,10 +124,10 @@ public class MyBatisConfig implements EnvironmentAware{
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
-//    @Bean
-//    public PlatformTransactionManager annotationDrivenTransactionManager() {
-//        return new DataSourceTransactionManager(dataSource());
-//    }
+    @Bean
+    public PlatformTransactionManager annotationDrivenTransactionManager() {
+        return new DataSourceTransactionManager(dataSource());
+    }
 
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
