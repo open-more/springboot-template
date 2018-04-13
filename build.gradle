@@ -14,7 +14,7 @@ buildscript {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath("org.flywaydb:flyway-gradle-plugin:4.1.2")
 		classpath 'org.springframework:springloaded:1.2.7.RELEASE'
-		
+
 	}
 }
 
@@ -28,7 +28,7 @@ apply plugin: "jacoco"
 
 
 apply plugin: 'org.flywaydb.flyway'
-apply plugin: 'war'
+//apply plugin: 'war'
 
 group = 'com.coursemore'
 version = '0.0.1-SNAPSHOT'
@@ -62,7 +62,7 @@ dependencies {
 
 help {
 	println 'usage:'
-	println '  1.配置mysql数据库，修改environment/dev/jdbc.properties文件'
+	println '  1.配置mysql数据库，修改environment/dev/application.properties文件'
 	println ''
 	println '  2.初始化环境：dev开发环境，prod生产环境'
 	println '    ./gradlew initEnv -Penv=dev'
@@ -86,26 +86,37 @@ ext {
 	}
 }
 
+def copyProperties = {
+	println('start initial environment')
+	def fromPath = 'environment/' + project["env"]
+	def propertiesDest = 'src/main/resources/'
+	println "拷贝：" + fromPath + '/*.properties文件到' + propertiesDest
+	copy {
+		from fromPath
+		into propertiesDest
+		include '**/*.*'
+	}
+}
 
 def getAppProperties = {
 	def properties = new Properties()
 	def dbPropertiesPath = sourceSets.main.resources.srcDirs[0].path
-	if(file("$dbPropertiesPath/application.properties").exists()){
-		file("$dbPropertiesPath/application.properties").withInputStream { inputStream ->
-			properties.load(inputStream)
-		}
-	}else{
-		println('## 警告：src/main/resources/application.properties没有找到')
+	if(!file("$dbPropertiesPath/application.properties").exists()){
+		println('## 警告：src/main/resources/application.properties没有找到，使用默认#开始环境#配置')
+		copyProperties()
+	}
+	file("$dbPropertiesPath/application.properties").withInputStream { inputStream ->
+		properties.load(inputStream)
 	}
 	properties
 }
 
-war{
-	archiveName="${baseName}-${project.version}.${extension}"
-}
+//war{
+//	archiveName="${baseName}-${project.version}.${extension}"
+//}
 
 jar {
-	baseName = 'todo'
+	baseName = 'tigervisa'
 	version = '0.0.1-SNAPSHOT'
 }
 
@@ -247,15 +258,7 @@ dependencies {
 // 初始化环境
 task initEnv {
 	doLast{
-		println('start initial environment')
-		def fromPath = 'environment/' + project["env"]
-		def propertiesDest = 'src/main/resources/'
-		println "拷贝：" + fromPath + '/*.properties文件到' + propertiesDest
-		copy {
-			from fromPath
-			into propertiesDest
-			include '**/*.*'
-		}
+		copyProperties()
 	}
 }
 

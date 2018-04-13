@@ -18,7 +18,7 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.support.SubjectThreadState;
 import org.apache.shiro.util.LifecycleUtils;
 import org.apache.shiro.util.ThreadState;
-import org.openmore.coursemore.common.shiro.MyRealm;
+import org.openmore.common.shiro.MyRealm;
 import org.openmore.common.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

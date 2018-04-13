@@ -2,7 +2,7 @@ package org.openmore.coursemore.controller.test.api;
 
 import org.junit.Test;
 import org.openmore.coursemore.BaseTestCase;
-import org.openmore.common.exception.*
+import org.openmore.common.exception.*;
 import org.openmore.common.utils.*;
 import org.openmore.coursemore.dto.ThirdLoginDto;
 import org.openmore.coursemore.dto.UserDto;

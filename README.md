@@ -15,6 +15,7 @@ Openmore团队是目前北京的一家创业公司内里的几个主程自发组
 ## 主要框架
 * **SpringBoot2.0.0release**
 * **thymeleaf**
+* **Docker自动部署**
 
 ## 工具框架
 * **Spring-Test** 
@@ -109,6 +110,10 @@ BUILD SUCCESSFUL
 ### 启动项目
 ```shell
 # ./gradlew bootRun
+```
+### 通过Docker启动
+```shell
+# ./deploy.sh
 ```
 
 ### 通过MybatisGenerator根据DB表结构，生成Mapper文件和对应的entity
